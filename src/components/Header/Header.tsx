@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heart, ShoppingBag } from 'lucide-react';
-import headerLogo from "../../assets/header-logo.svg"
-import "./header.scss"
+import headerLogo from "../../assets/header-logo.png"
+import "./Header.scss"
 
 interface IHeaderProps { }
 
@@ -10,6 +10,11 @@ const Header: React.FC = () => {
 		<>
 			<header className="header">
 				<div className="header__inner">
+					<div className="header__burger">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
 					<div className="header__left">
 						<a href='#' className="header__logo">
 							<img src={headerLogo} alt="header logo" />
@@ -22,6 +27,10 @@ const Header: React.FC = () => {
 							<a href="#" className="nav__link">Blog</a>
 							<a href="#" className="nav__link">Sale</a>
 							<a href="#" className="nav__link">Contact us</a>
+							{/* <a href="#" className="nav__link nav__link--profile nav__link--favorite">My favorites</a>
+							<a href="#" className="nav__link nav__link--profile">Sign in</a>
+							<a href="#" className="nav__link nav__link--profile">CREATE AN ACCOUNT</a>
+							<a href="#" className="nav__link nav__link--profile">My profile</a> */}
 						</nav>
 					</div>
 					<div className="header__right">
