@@ -1,0 +1,70 @@
+@use "../../scss/vars.scss" as *;
+
+.intro {
+	padding: 45px 0;
+	font-family: 'Oswald', sans-serif;
+	position: relative;
+	background: url("../../assets/intro-bg.jpg") center no-repeat;
+	background-size: cover;
+	// .intro__container
+
+	&__container {
+		max-width: 1530px;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+
+	// .intro__inner
+
+	&__inner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	// .intro__info
+
+	&__info {}
+
+	// .intro__title
+
+	&__title {
+		font-size: 86px;
+		font-weight: 600;
+		color: $black;
+		text-transform: uppercase;
+		max-width: 510px;
+		line-height: 1.1;
+		margin-bottom: 35px;
+
+		span {
+			color: transparent;
+			-webkit-text-stroke: 2px $black;
+		}
+	}
+
+	// .intro__btn
+
+	&__btn {}
+
+	// .intro__img
+
+	&__img {}
+
+	// .intro__bg
+
+	&__bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		max-width: 100%;
+		height: 100%;
+		display: block;
+		z-index: -1;
+		opacity: 0.7;
+	}
+}
+
+.btn {}
+
+.btn--grey {}

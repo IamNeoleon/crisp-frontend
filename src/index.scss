@@ -1,3 +1,5 @@
+@use "./scss/vars.scss" as *;
+
 *,
 *::before,
 *::after {
@@ -10,7 +12,7 @@ body {
 	font-optical-sizing: auto;
 	font-style: normal;
 	background-color: #fff;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 a {
@@ -46,7 +48,22 @@ li {
 }
 
 .container {
-	max-width: 1100px;
+	max-width: 1930px;
 	padding: 0 15px;
 	margin: 0 auto;
+}
+
+.btn {
+	padding: 13px 50px;
+	font-size: 18px;
+	font-weight: 500;
+	color: $black;
+	text-transform: uppercase;
+	border: 3px solid $black;
+	transition: all 0.2s linear;
+
+	&:hover {
+		background-color: $black;
+		color: #fff;
+	}
 }
