@@ -1,0 +1,36 @@
+.filters {
+
+    // .filters__filter
+    &__filter {
+        margin-bottom: 30px;
+    }
+
+    // .filters__title
+    &__title {
+        font-size: 24px;
+        font-family: 'Oswald', sans-serif;
+        margin-bottom: 15px;
+    }
+
+
+    &__checkboxes {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__sizes {
+        display: grid;
+        grid-template-columns: repeat(5, 46px);
+        grid-auto-flow: row;
+        gap: 10px;
+    }
+
+    &__colors {
+        display: grid;
+        grid-template-columns: repeat(7, 31px);
+        grid-auto-flow: row;
+        gap: 10px;
+    }
+
+}

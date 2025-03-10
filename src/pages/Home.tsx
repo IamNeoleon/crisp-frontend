@@ -1,15 +1,10 @@
 import React from 'react';
-import Intro from '../components/Intro/Intro';
-import Brands from '../components/Brands/Brands';
-import Offers from '../components/Offers/Offer';
-
+import HomePage from '../components/Sections/HomePage';
 
 const Home: React.FC = () => {
 	return (
 		<>
-			<Intro />
-			<Brands />
-			<Offers />
+			<HomePage />
 		</>
 	);
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import "./brands.scss";
+import "./HomePage.scss";
 import Brand1 from '../../assets/brands/01.png'
 import Brand2 from '../../assets/brands/02.png'
 import Brand3 from '../../assets/brands/03.png'

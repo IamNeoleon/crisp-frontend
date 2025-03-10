@@ -1,0 +1,38 @@
+.promoBanner {
+    padding: 80px 0;
+    background: url('../../assets//promo-banner/01.jpg') center no-repeat;
+    background-size: cover;
+
+    // .promoBanner__container
+    &__container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    // .promoBanner__info
+    &__info {
+        max-width: 650px;
+    }
+
+
+    // .promoBanner__title
+    &__title {
+        font-weight: 500;
+        font-size: 56px;
+        line-height: 129%;
+        text-transform: uppercase;
+        font-family: 'Oswald', sans-serif;
+    }
+
+    // .promoBanner__text
+    &__text {
+        font-size: 25px;
+        line-height: 148%;
+        letter-spacing: 0.01em;
+        font-weight: 400;
+        margin: 10px 0 20px;
+    }
+
+    // .promoBanner__btn
+    &__btn {}
+}

@@ -1,12 +1,9 @@
 import React from 'react';
-import "./intro.scss";
+import "./HomePage.scss";
 import introImg from '../../assets/slider-img.jpg';
-import introBg from '../../assets/intro-bg.jpg';
 
 
-interface IIntroProps { }
-
-const Intro: React.FC<IIntroProps> = () => {
+const Intro: React.FC = () => {
     return (
         <>
             <div className="intro">

@@ -48,7 +48,7 @@ li {
 }
 
 .container {
-	max-width: 1930px;
+	max-width: 1500px;
 	padding: 0 15px;
 	margin: 0 auto;
 }
@@ -66,4 +66,25 @@ li {
 		background-color: $black;
 		color: #fff;
 	}
+}
+
+// shop
+
+.shop {
+
+
+	// .shop__catalog
+	&__catalog {
+		display: flex;
+		padding-top: 20px;
+	}
+}
+
+.sidebar {
+	flex: 0 1 20%;
+	border-right: 1px solid #c4c4c4;
+}
+
+.catalog {
+	flex: 0 1 80%;
 }

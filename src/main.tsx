@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
-import { store } from './redux/store.ts'
+import { store } from './store/index.ts'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router'
 
