@@ -1,0 +1,35 @@
+.card {
+    font-family: 'Oswald', sans-serif;
+}
+
+.img {
+    img {
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 3/4;
+        max-width: 100%;
+    }
+}
+
+.title {
+    font-weight: 300;
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+
+.price {
+    font-weight: 500;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.colors {
+    display: flex;
+    gap: 15px;
+}
+
+.color {
+    width: 17px;
+    height: 17px;
+}

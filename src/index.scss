@@ -83,8 +83,24 @@ li {
 .sidebar {
 	flex: 0 1 20%;
 	border-right: 1px solid #c4c4c4;
+	padding: 20px 40px 20px 0;
 }
 
 .catalog {
 	flex: 0 1 80%;
+}
+
+.catalog__order {}
+
+.catalog__top {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.catalog__products {
+	padding: 20px 0 20px 30px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	column-gap: 25px;
+	row-gap: 40px;
 }

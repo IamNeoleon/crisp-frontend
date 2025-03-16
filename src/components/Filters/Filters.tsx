@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Checkbox from '../Checkbox/Checkbox';
 import FilterSizes from '../FilterSize/FilterSize';
 import FilterColor from '../FilterColor/FilterColor';
+import FilterPrice from '../FilterPrice/FilterPrice';
 import "./filter.scss";
 
 type FiltersState = {
@@ -27,6 +28,7 @@ const Filters: React.FC = () => {
    const [isChecked, setIsChecked] = useState(false);
    const [selectedSize, setSelectedSize] = useState<string>("W30")
    const [selectedColor, setSelectedColor] = useState<string>(colors[1])
+   const [priceRange, setPriceRange] = useState<[number, number]>([0, 250]);
 
    const handleCheckboxChange = (category: keyof typeof filters, value: string) => {
       setFilters((prev) => {
@@ -38,21 +40,11 @@ const Filters: React.FC = () => {
       });
    };
 
-   const renderCheckboxes = (category: keyof FiltersState, options: string[]) => (
-      <div>
-         <p>{category.charAt(0).toUpperCase() + category.slice(1)}</p>
-         {options.map(option => (
-            <label key={option}>
-               <input
-                  type="checkbox"
-                  checked={filters[category].includes(option.toLowerCase())}
-                  onChange={() => handleCheckboxChange(category, option.toLowerCase())}
-               />
-               {option}
-            </label>
-         ))}
-      </div>
-   );
+   const handleSliderChange = (value: number | number[]) => {
+      if (Array.isArray(value)) {
+         setPriceRange([value[0], value[1]]);
+      }
+   };
 
    return (
       <>
@@ -99,6 +91,11 @@ const Filters: React.FC = () => {
                   ))}
                </div>
             </div>
+            <div className='filters__filter'>
+               <div className='filters__title'>Price Range</div>
+               <FilterPrice priceRange={priceRange} onChangePrice={handleSliderChange} />
+            </div>
+            <button className="filters__btn">Apply</button>
          </div>
       </>
    );

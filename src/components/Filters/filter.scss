@@ -1,4 +1,6 @@
 .filters {
+    display: flex;
+    flex-direction: column;
 
     // .filters__filter
     &__filter {
@@ -33,4 +35,21 @@
         gap: 10px;
     }
 
+    &__btn {
+        font-family: 'Oswald', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 10px 35px;
+        color: #828282;
+        background-color: #f0f1f2;
+        border: 2px solid #c4c4c4;
+        transition: all 0.1s linear;
+        margin-left: auto;
+
+        &:hover {
+            border-color: #828282;
+        }
+    }
 }

@@ -16,6 +16,7 @@
     "embla-carousel-react": "^8.5.2",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.476.0",
+    "rc-slider": "^11.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",

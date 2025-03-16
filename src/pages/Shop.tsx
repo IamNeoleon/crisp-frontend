@@ -1,6 +1,8 @@
 import React from 'react';
 import PromoBanner from '../components/PromoBanner/PromoBanner';
-import Sidebar from '../components/Sidebar/Sidebar';
+import Filters from '../components/Filters/Filters';
+import CatalogOrder from '../components/CatalogOrder/CatalogOrder';
+import Card from '../components/Card/Card';
 
 interface IShopProps { }
 
@@ -11,8 +13,24 @@ const Shop: React.FC<IShopProps> = (props) => {
                 <PromoBanner />
                 <div className="container">
                     <div className="shop__catalog">
-                        <Sidebar />
-                        <div className="catalog"></div>
+                        <div className="sidebar">
+                            <Filters />
+                        </div>
+                        <div className="catalog">
+                            <div className="catalog__top">
+                                <CatalogOrder />
+                            </div>
+                            <div className="catalog__products">
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
