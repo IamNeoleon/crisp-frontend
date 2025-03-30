@@ -3,10 +3,13 @@ import PromoBanner from '../components/PromoBanner/PromoBanner';
 import Filters from '../components/Filters/Filters';
 import CatalogOrder from '../components/CatalogOrder/CatalogOrder';
 import Card from '../components/Card/Card';
+import { useGetProductsQuery } from '../store/api/productsApi';
 
-interface IShopProps { }
 
-const Shop: React.FC<IShopProps> = (props) => {
+const Shop: React.FC = () => {
+    const { data: products, isLoading, error } = useGetProductsQuery()
+
+    console.log(products);
     return (
         <>
             <div className="shop">
@@ -21,14 +24,7 @@ const Shop: React.FC<IShopProps> = (props) => {
                                 <CatalogOrder />
                             </div>
                             <div className="catalog__products">
-                                <Card />
-                                <Card />
-                                <Card />
-                                <Card />
-                                <Card />
-                                <Card />
-                                <Card />
-                                <Card />
+                                {products?.map(product => <Card key={product.id} product={product} />)}
                             </div>
                         </div>
                     </div>

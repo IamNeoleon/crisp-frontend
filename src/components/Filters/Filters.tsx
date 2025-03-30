@@ -73,8 +73,8 @@ const Filters: React.FC = () => {
             <div className='filters__filter'>
                <div className='filters__title'>Color</div>
                <div className="filters__colors">
-                  {colors.map(color => (
-                     <FilterColor color={color} isSelected={color === selectedColor} onClick={() => setSelectedColor(color)} />
+                  {colors.map((color, index) => (
+                     <FilterColor key={`${color}-${index}`} color={color} isSelected={color === selectedColor} onClick={() => setSelectedColor(color)} />
                   ))}
                </div>
             </div>

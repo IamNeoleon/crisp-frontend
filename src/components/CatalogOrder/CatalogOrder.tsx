@@ -23,8 +23,8 @@ const CatalogOrder: React.FC<ICatalogOrderProps> = () => {
                     <ChevronDown />
                 </div>
                 <div className="catalogOrder__list">
-                    {variants.filter(variant => variant != order).map(variant => (
-                        <div onClick={() => handleSelectOrder(variant)} className="catalogOrder__variant">
+                    {variants.filter(variant => variant != order).map((variant, index) => (
+                        <div key={index} onClick={() => handleSelectOrder(variant)} className="catalogOrder__variant">
                             {variant}
                         </div>
                     ))}

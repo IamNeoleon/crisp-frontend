@@ -1,23 +1,34 @@
 import React from 'react';
 import styles from './Card.module.scss';
-import cardImg from '../../assets/card-img.jpg';
+import { IProduct } from '../../@types';
 
-interface ICardProps { }
+interface ICardProps {
+    product: IProduct,
+}
 
-const Card: React.FC<ICardProps> = () => {
+const Card: React.FC<ICardProps> = ({ product }) => {
+    const avialableColors: string[] = [];
+    const productVariant = product.variants[0];
+
+    product.variants.forEach(item => {
+        avialableColors.push(item.colorCode)
+    })
+
     return (
         <>
             <div className={styles.card}>
                 <div className={styles.img}>
-                    <img src={cardImg} alt="cardImg" />
+                    <img src={productVariant.images[0].url} alt="cardImg" />
                 </div>
                 <div className={styles.info}>
-                    <div className={styles.title}>Angels malu zip jeans slim black used</div>
-                    <div className={styles.price}>139,00 EUR</div>
+                    <div className={styles.title}>{product.name}</div>
+                    <div className={styles.price}>{productVariant.price} EUR</div>
                     <div className={styles.colors}>
-                        <div className={styles.color} style={{ backgroundColor: '#24426A' }}></div>
-                        <div className={styles.color} style={{ backgroundColor: '#18574A' }}></div>
-                        <div className={styles.color} style={{ backgroundColor: '#666689' }}></div>
+                        {avialableColors.map(color => (
+                            <div className={styles.block}>
+                                <div className={styles.color} style={{ backgroundColor: color }}></div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div >
