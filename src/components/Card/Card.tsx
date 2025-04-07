@@ -24,8 +24,8 @@ const Card: React.FC<ICardProps> = ({ product }) => {
                     <div className={styles.title}>{product.name}</div>
                     <div className={styles.price}>{productVariant.price} EUR</div>
                     <div className={styles.colors}>
-                        {avialableColors.map(color => (
-                            <div className={styles.block}>
+                        {avialableColors.map((color, index) => (
+                            <div key={index} className={styles.block}>
                                 <div className={styles.color} style={{ backgroundColor: color }}></div>
                             </div>
                         ))}

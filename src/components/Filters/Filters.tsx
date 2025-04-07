@@ -14,20 +14,60 @@ const brands = ["STATE", "COOPER", "BARDOT", "ALFANI", "CECE", "DONNA RICCO"];
 const sizes = ["W30", "W31", "W32", "W33", "W34", "W35"];
 const dressLengths = ["SHORT", "KNEE LENGTH", "HIGH LOW"];
 const colors = [
-   "#292A2D", "#FF5733", "#33FF57", "#3357FF", "#FF33A1",
-   "#FFD700", "#8A2BE2", "#00CED1", "#DC143C", "#20B2AA",
-   "#FF4500", "#556B2F", "#708090", "#9932CC"
-];
+   {
+      colorName: "black",
+      colorCode: "#000000"
+   },
+   {
+      colorName: "red",
+      colorCode: "#ff0000"
+   },
+   {
+      colorName: "beige",
+      colorCode: "#f5f5dc"
+   },
+   {
+      colorName: "white",
+      colorCode: "#fff"
+   },
+   {
+      colorName: "lilac",
+      colorCode: "#c8a2c8"
+   },
+   {
+      colorName: "pink",
+      colorCode: "#ffc0cb"
+   },
+   {
+      colorName: "blue",
+      colorCode: "#0000ff"
+   },
+   {
+      colorName: "light gray",
+      colorCode: "#c8c8c8"
+   },
+   {
+      colorName: "dark gray",
+      colorCode: "#666666"
+   },
+   {
+      colorName: "green",
+      colorCode: "#00ff00"
+   }
+]
 
+export type TColor = {
+   colorName: string,
+   colorCode: string
+}
 
 const Filters: React.FC = () => {
    const [filters, setFilters] = useState<FiltersState>({
       brand: ['bardot'],
       dressLength: ['high low']
    })
-   const [isChecked, setIsChecked] = useState(false);
    const [selectedSize, setSelectedSize] = useState<string>("W30")
-   const [selectedColor, setSelectedColor] = useState<string>(colors[1])
+   const [selectedColor, setSelectedColor] = useState<TColor>(colors[1])
    const [priceRange, setPriceRange] = useState<[number, number]>([0, 250]);
 
    const handleCheckboxChange = (category: keyof typeof filters, value: string) => {
@@ -45,6 +85,10 @@ const Filters: React.FC = () => {
          setPriceRange([value[0], value[1]]);
       }
    };
+
+   const applyFilters = () => {
+
+   }
 
    return (
       <>
@@ -71,14 +115,6 @@ const Filters: React.FC = () => {
                </div>
             </div>
             <div className='filters__filter'>
-               <div className='filters__title'>Color</div>
-               <div className="filters__colors">
-                  {colors.map((color, index) => (
-                     <FilterColor key={`${color}-${index}`} color={color} isSelected={color === selectedColor} onClick={() => setSelectedColor(color)} />
-                  ))}
-               </div>
-            </div>
-            <div className='filters__filter'>
                <div className='filters__title'>Dress Length</div>
                <div className="filters__checkboxes">
                   {dressLengths.map((length) => (
@@ -88,6 +124,14 @@ const Filters: React.FC = () => {
                         checked={filters.dressLength.includes(length.toLowerCase())}
                         onChange={() => handleCheckboxChange("dressLength", length.toLowerCase())}
                      />
+                  ))}
+               </div>
+            </div>
+            <div className='filters__filter'>
+               <div className='filters__title'>Color</div>
+               <div className="filters__colors">
+                  {colors.map((color, index) => (
+                     <FilterColor key={`${color.colorName}-${index}`} color={color} isSelected={color.colorName === selectedColor.colorName} onClick={() => setSelectedColor(color)} />
                   ))}
                </div>
             </div>

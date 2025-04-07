@@ -9,7 +9,6 @@ import { useGetProductsQuery } from '../store/api/productsApi';
 const Shop: React.FC = () => {
     const { data: products, isLoading, error } = useGetProductsQuery()
 
-    console.log(products);
     return (
         <>
             <div className="shop">
