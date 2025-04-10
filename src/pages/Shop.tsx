@@ -4,10 +4,20 @@ import Filters from '../components/Filters/Filters';
 import CatalogOrder from '../components/CatalogOrder/CatalogOrder';
 import Card from '../components/Card/Card';
 import { useGetProductsQuery } from '../store/api/productsApi';
+import { useAppSelector } from '../hooks';
+import { selectFilters } from '../store/slices/filtersSlice';
 
 
 const Shop: React.FC = () => {
-    const { data: products, isLoading, error } = useGetProductsQuery()
+    const { size, brands, color, dressLengths, sort, price } = useAppSelector(selectFilters);
+    const { data: products, isLoading, error } = useGetProductsQuery({
+        brands: brands,
+        dressLengths: dressLengths,
+        color: color,
+        size: size,
+        sort: sort,
+        price: price
+    })
 
     return (
         <>

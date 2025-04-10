@@ -4,6 +4,8 @@ import FilterSizes from '../FilterSize/FilterSize';
 import FilterColor from '../FilterColor/FilterColor';
 import FilterPrice from '../FilterPrice/FilterPrice';
 import "./filter.scss";
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { selectFilters, setBrands, setColor, setDressLengths, setPrice, setSize } from '../../store/slices/filtersSlice';
 
 type FiltersState = {
    brand: string[];
@@ -12,7 +14,7 @@ type FiltersState = {
 
 const brands = ["STATE", "COOPER", "BARDOT", "ALFANI", "CECE", "DONNA RICCO"];
 const sizes = ["W30", "W31", "W32", "W33", "W34", "W35"];
-const dressLengths = ["SHORT", "KNEE LENGTH", "HIGH LOW"];
+const dressLengths = ["short", "knee", "high low"];
 const colors = [
    {
       colorName: "black",
@@ -62,6 +64,8 @@ export type TColor = {
 }
 
 const Filters: React.FC = () => {
+   const dispatch = useAppDispatch();
+   const selectedFilters = useAppSelector(selectFilters)
    const [filters, setFilters] = useState<FiltersState>({
       brand: ['bardot'],
       dressLength: ['high low']
@@ -87,7 +91,12 @@ const Filters: React.FC = () => {
    };
 
    const applyFilters = () => {
-
+      dispatch(setBrands(filters.brand))
+      dispatch(setDressLengths(filters.dressLength))
+      dispatch(setSize(selectedSize))
+      dispatch(setColor(selectedColor))
+      dispatch(setPrice({ from: priceRange[0], to: priceRange[1] }))
+      console.log(selectedFilters);
    }
 
    return (
@@ -139,7 +148,7 @@ const Filters: React.FC = () => {
                <div className='filters__title'>Price Range</div>
                <FilterPrice priceRange={priceRange} onChangePrice={handleSliderChange} />
             </div>
-            <button className="filters__btn">Apply</button>
+            <button onClick={applyFilters} className="filters__btn">Apply</button>
          </div>
       </>
    );

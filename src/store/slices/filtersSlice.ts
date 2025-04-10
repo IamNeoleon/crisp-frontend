@@ -1,46 +1,57 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '..';
+import { TColor } from '../../components/Filters/Filters';
 
-type TPriceRange = {
+export type TPriceRange = {
     from: number,
     to: number
 }
 
 export interface IFiltersState {
-    brand: string,
-    dressLength: string,
+    brands: string[],
+    dressLengths: string[],
     size: string,
-    color: string,
+    color: TColor,
     price: TPriceRange,
-    sortBy: string
+    sort: string
 }
 
 const initialState: IFiltersState = {
-    brand: '',
-    dressLength: '',
+    brands: [],
+    dressLengths: [],
     size: '',
-    color: '',
+    color: { colorName: '', colorCode: '' },
     price: { from: 0, to: 0 },
-    sortBy: ''
+    sort: ''
 }
 
 export const filtersSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        setBrand(state, action: PayloadAction<string>) {
-            state.brand = action.payload
+        setBrands(state, action: PayloadAction<string[]>) {
+            state.brands = action.payload
         },
-        setdressLength(state, action: PayloadAction<string>) {
-            state.dressLength = action.payload
+        setDressLengths(state, action: PayloadAction<string[]>) {
+            state.dressLengths = action.payload
         },
-        setsize(state, action: PayloadAction<string>) {
+        setSize(state, action: PayloadAction<string>) {
             state.size = action.payload
+        },
+        setColor(state, action: PayloadAction<TColor>) {
+            state.color = action.payload
+        },
+        setPrice(state, action: PayloadAction<TPriceRange>) {
+            state.price = action.payload
+        },
+        setSort(state, action: PayloadAction<string>) {
+            state.sort = action.payload
         }
     },
 })
 
-// Action creators are generated for each case reducer function
-// export const { } = counterSlice.actions
+export const { setBrands, setDressLengths, setSize, setColor, setPrice, setSort } = filtersSlice.actions
+export const selectFilters = (state: RootState) => state.filters;
 
 export default filtersSlice.reducer
