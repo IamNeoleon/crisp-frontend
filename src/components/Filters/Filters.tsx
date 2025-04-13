@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Checkbox from '../Checkbox/Checkbox';
 import FilterSizes from '../FilterSize/FilterSize';
 import FilterColor from '../FilterColor/FilterColor';
 import FilterPrice from '../FilterPrice/FilterPrice';
 import "./filter.scss";
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectFilters, setBrands, setColor, setDressLengths, setPrice, setSize } from '../../store/slices/filtersSlice';
+import { applyFilters, selectDraftFilters, setDraftBrands, setDraftColor, setDraftDressLengths, setDraftPrice, setDraftSize } from '../../store/slices/filtersSlice';
 
-type FiltersState = {
-   brand: string[];
-   dressLength: string[];
-};
-
-const brands = ["STATE", "COOPER", "BARDOT", "ALFANI", "CECE", "DONNA RICCO"];
-const sizes = ["W30", "W31", "W32", "W33", "W34", "W35"];
-const dressLengths = ["short", "knee", "high low"];
-const colors = [
+const dataBrands = ["STATE", "COOPER", "BARDOT", "ALFANI", "CECE", "DONNA RICCO"];
+const dataSizes = ["W30", "W31", "W32", "W33", "W34", "W35"];
+const dataDressLengths = ["short", "knee", "high low"];
+const dataColors = [
    {
       colorName: "black",
       colorCode: "#000000"
@@ -65,38 +60,17 @@ export type TColor = {
 
 const Filters: React.FC = () => {
    const dispatch = useAppDispatch();
-   const selectedFilters = useAppSelector(selectFilters)
-   const [filters, setFilters] = useState<FiltersState>({
-      brand: ['bardot'],
-      dressLength: ['high low']
-   })
-   const [selectedSize, setSelectedSize] = useState<string>("W30")
-   const [selectedColor, setSelectedColor] = useState<TColor>(colors[1])
-   const [priceRange, setPriceRange] = useState<[number, number]>([0, 250]);
+   const { brands, dressLengths, size, color, price } = useAppSelector(selectDraftFilters)
 
-   const handleCheckboxChange = (category: keyof typeof filters, value: string) => {
-      setFilters((prev) => {
-         const updated = prev[category].includes(value)
-            ? prev[category].filter((item) => item !== value)
-            : [...prev[category], value];
-
-         return { ...prev, [category]: updated };
-      });
-   };
 
    const handleSliderChange = (value: number | number[]) => {
       if (Array.isArray(value)) {
-         setPriceRange([value[0], value[1]]);
+         dispatch(setDraftPrice({ from: value[0], to: value[1] }));
       }
-   };
+   }
 
-   const applyFilters = () => {
-      dispatch(setBrands(filters.brand))
-      dispatch(setDressLengths(filters.dressLength))
-      dispatch(setSize(selectedSize))
-      dispatch(setColor(selectedColor))
-      dispatch(setPrice({ from: priceRange[0], to: priceRange[1] }))
-      console.log(selectedFilters);
+   const handleApply = () => {
+      dispatch(applyFilters());
    }
 
    return (
@@ -105,12 +79,12 @@ const Filters: React.FC = () => {
             <div className='filters__filter'>
                <div className='filters__title'>Brand</div>
                <div className="filters__checkboxes">
-                  {brands.map((brand) => (
+                  {dataBrands.map((brand) => (
                      <Checkbox
                         key={brand}
                         label={brand}
-                        checked={filters.brand.includes(brand.toLowerCase())}
-                        onChange={() => handleCheckboxChange("brand", brand.toLowerCase())}
+                        checked={brands.includes(brand.toLowerCase())}
+                        onChange={() => dispatch(setDraftBrands(brand.toLowerCase()))}
                      />
                   ))}
                </div>
@@ -118,20 +92,20 @@ const Filters: React.FC = () => {
             <div className='filters__filter'>
                <div className='filters__title'>Size (Inches)</div>
                <div className="filters__sizes">
-                  {sizes.map(size => (
-                     <FilterSizes key={size} size={size} isSelected={size === selectedSize} onClick={() => setSelectedSize(size)} />
+                  {dataSizes.map(dataSize => (
+                     <FilterSizes key={dataSize} size={dataSize} isSelected={dataSize === size} onClick={() => dispatch(setDraftSize(dataSize))} />
                   ))}
                </div>
             </div>
             <div className='filters__filter'>
                <div className='filters__title'>Dress Length</div>
                <div className="filters__checkboxes">
-                  {dressLengths.map((length) => (
+                  {dataDressLengths.map((length) => (
                      <Checkbox
                         key={length}
                         label={length}
-                        checked={filters.dressLength.includes(length.toLowerCase())}
-                        onChange={() => handleCheckboxChange("dressLength", length.toLowerCase())}
+                        checked={dressLengths.includes(length.toLowerCase())}
+                        onChange={() => dispatch(setDraftDressLengths(length.toLowerCase()))}
                      />
                   ))}
                </div>
@@ -139,16 +113,21 @@ const Filters: React.FC = () => {
             <div className='filters__filter'>
                <div className='filters__title'>Color</div>
                <div className="filters__colors">
-                  {colors.map((color, index) => (
-                     <FilterColor key={`${color.colorName}-${index}`} color={color} isSelected={color.colorName === selectedColor.colorName} onClick={() => setSelectedColor(color)} />
+                  {dataColors.map((dataColor, index) => (
+                     <FilterColor
+                        key={`${dataColor.colorName}-${index}`}
+                        color={dataColor}
+                        isSelected={dataColor.colorName === color.colorName}
+                        onClick={() => dispatch(setDraftColor(dataColor))}
+                     />
                   ))}
                </div>
             </div>
             <div className='filters__filter'>
                <div className='filters__title'>Price Range</div>
-               <FilterPrice priceRange={priceRange} onChangePrice={handleSliderChange} />
+               <FilterPrice priceRange={[price.from, price.to]} onChangePrice={handleSliderChange} />
             </div>
-            <button onClick={applyFilters} className="filters__btn">Apply</button>
+            <button onClick={handleApply} className="filters__btn">Apply</button>
          </div>
       </>
    );

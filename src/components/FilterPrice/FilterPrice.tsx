@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'rc-slider/assets/index.css';
 import './FilterPrice.scss';
-import Slider from 'rc-slider'; // Импортируем только Slider
+import Slider from 'rc-slider';
 
 interface IFilterPriceProps {
     priceRange: [number, number],

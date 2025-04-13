@@ -9,49 +9,92 @@ export type TPriceRange = {
 }
 
 export interface IFiltersState {
-    brands: string[],
-    dressLengths: string[],
-    size: string,
-    color: TColor,
-    price: TPriceRange,
-    sort: string
+    draft: {
+        brands: string[],
+        dressLengths: string[],
+        size: string,
+        color: TColor,
+        price: TPriceRange,
+    },
+    applied: {
+        brands: string[],
+        dressLengths: string[],
+        size: string,
+        color: TColor,
+        price: TPriceRange,
+    }
 }
 
 const initialState: IFiltersState = {
-    brands: [],
-    dressLengths: [],
-    size: '',
-    color: { colorName: '', colorCode: '' },
-    price: { from: 0, to: 0 },
-    sort: ''
+    draft: {
+        brands: [],
+        size: '',
+        color: {
+            colorCode: '',
+            colorName: ''
+        },
+        dressLengths: [],
+        price: { from: 0, to: 0 },
+    },
+    applied: {
+        brands: [],
+        size: '',
+        color: {
+            colorCode: '',
+            colorName: ''
+        },
+        dressLengths: [],
+        price: { from: 0, to: 0 },
+    },
 }
 
 export const filtersSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        setBrands(state, action: PayloadAction<string[]>) {
-            state.brands = action.payload
+        setDraftBrands(state, action: PayloadAction<string>) {
+            const brand = action.payload.toLowerCase(); // можно тут toLowerCase, если ты так хранишь
+            const index = state.draft.brands.indexOf(brand);
+            if (index === -1) {
+                state.draft.brands.push(brand);
+            } else {
+                state.draft.brands.splice(index, 1);
+            }
         },
-        setDressLengths(state, action: PayloadAction<string[]>) {
-            state.dressLengths = action.payload
+        setDraftDressLengths(state, action: PayloadAction<string>) {
+            const length = action.payload.toLowerCase();
+            const index = state.draft.dressLengths.indexOf(length);
+            if (index === -1) {
+                state.draft.dressLengths.push(length);
+            } else {
+                state.draft.dressLengths.splice(index, 1);
+            }
         },
-        setSize(state, action: PayloadAction<string>) {
-            state.size = action.payload
+        setDraftSize(state, action: PayloadAction<string>) {
+            if (state.draft.size == action.payload) {
+                state.draft.size = '';
+            } else {
+                state.draft.size = action.payload;
+            }
         },
-        setColor(state, action: PayloadAction<TColor>) {
-            state.color = action.payload
+        setDraftColor(state, action: PayloadAction<TColor>) {
+            state.draft.color = action.payload
         },
-        setPrice(state, action: PayloadAction<TPriceRange>) {
-            state.price = action.payload
+        setDraftPrice(state, action: PayloadAction<TPriceRange>) {
+            state.draft.price = action.payload
         },
-        setSort(state, action: PayloadAction<string>) {
-            state.sort = action.payload
-        }
+        applyFilters(state) {
+            state.applied = { ...state.draft }
+        },
+        resetFilters(state) {
+            state.draft = initialState.draft;
+            state.applied = initialState.applied;
+        },
     },
 })
 
-export const { setBrands, setDressLengths, setSize, setColor, setPrice, setSort } = filtersSlice.actions
-export const selectFilters = (state: RootState) => state.filters;
+export const { setDraftBrands, setDraftDressLengths, setDraftSize, setDraftColor, setDraftPrice, applyFilters, resetFilters } = filtersSlice.actions
+export const selectDraftFilters = (state: RootState) => state.filters.draft;
+export const selectAppliedsFilters = (state: RootState) => state.filters.applied;
 
 export default filtersSlice.reducer

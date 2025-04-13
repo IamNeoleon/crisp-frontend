@@ -3,13 +3,16 @@ import PromoBanner from '../components/PromoBanner/PromoBanner';
 import Filters from '../components/Filters/Filters';
 import CatalogOrder from '../components/CatalogOrder/CatalogOrder';
 import Card from '../components/Card/Card';
+import AppliedFilters from '../components/AppliedFilters/AppliedFilters';
 import { useGetProductsQuery } from '../store/api/productsApi';
 import { useAppSelector } from '../hooks';
-import { selectFilters } from '../store/slices/filtersSlice';
+import { selectAppliedsFilters, selectDraftFilters } from '../store/slices/filtersSlice';
 
 
 const Shop: React.FC = () => {
-    const { size, brands, color, dressLengths, sort, price } = useAppSelector(selectFilters);
+    const { brands, size, dressLengths, color, price } = useAppSelector(selectAppliedsFilters)
+    const sort = "";
+
     const { data: products, isLoading, error } = useGetProductsQuery({
         brands: brands,
         dressLengths: dressLengths,
@@ -26,6 +29,7 @@ const Shop: React.FC = () => {
                 <div className="container">
                     <div className="shop__catalog">
                         <div className="sidebar">
+                            <AppliedFilters />
                             <Filters />
                         </div>
                         <div className="catalog">
